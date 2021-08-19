@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row mb-5">
+           <div class="col-12">
+            <h2 class="text-center text-primary mt-5 title">Javascript Clock</h2>
+            <div class="bg-btn ms-4">
+             <span class="change-bg m-5"><i class="bi bi-sun day"></i></span> 
+             <span class="change-bg m-5"><i class="bi bi-moon-stars-fill night"></i></span>
+            </div>
+           </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-5 d-flex flex-column justify-content-center align-items-center">
+                <div class="clock">
+                    <h2 class="text-center py-4"><span id="hour"></span> : <span id="min"></span> : <span id="sec"></span> <span id="preiod"></span></h2>
+                </div> 
+                <div class="clock-name">
+                    <h2 class="mt-5">Digital Clock</h2> 
+                </div> 
+            </div>
+            <div class="col-md-5 mt-5 d-flex flex-column justify-content-center align-items-center">
+                <div class="analog">
+                    <div class="analog_field">
+                        <div class="dot">                          
+                        </div>
+                        <div id="analog-hr" class="hr"></div>
+                        <div id="analog-min" class="min"></div>
+                        <div id="analog-sec" class="sec"></div>
+                        <div class="author">
+                            <h4>HK Himu</h4>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="clock-name">
+                    <h2 class="mt-5">Analog Clock</h2> 
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    
+
+   
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+    <script>
+        function getElem(selcetId, item){
+            let field = document.getElementById(selcetId);
+            field.innerText = item;
+        }
+
+        setInterval(function(){
+            let time = new Date();
+        let h = time.getHours();
+        let m = time.getMinutes();
+        let s = time.getSeconds();
+
+        if(h >= 12){
+            getElem('preiod', 'PM');
+        }
+        else{
+            getElem('preiod', 'AM');  
+        }
+        h = (h > 12)? h - 12: h;
+        h = (h < 10)? '0'+ h: h;
+        m = (m < 10)? '0'+ m: m;
+        s = (s < 10)? '0'+ s: s;
+
+        getElem('hour', h);
+        getElem('min', m);
+        getElem('sec', s);
+
+        let hr_rotation = 30 * h + m / 2;
+        let min_rotation = 6 * m;
+        let sec_rotation = 6 * s;
+        document.getElementById('analog-sec').style.transform = ` rotate(${sec_rotation}deg) `;
+        document.getElementById('analog-min').style.transform = ` rotate(${min_rotation}deg) `;
+        document.getElementById('analog-hr').style.transform = ` rotate(${hr_rotation}deg) `;
+
+        }, 1000);
+
+        
+
+    </script>
+
+
+    
+</body>
+</html>
